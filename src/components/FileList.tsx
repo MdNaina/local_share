@@ -1,20 +1,14 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { File } from './File'
+import { FileObject } from './fileInterface'
 
 
 export const FileList: FC<{}> = () => {
-
-  interface FileObject {
-    id: string;
-    name: string;
-    type: string;
-    path: string;
-  }
-
-
   const datas: Array<FileObject> = [
     { id: "24241", name: "image1", path: "public/upload/", type: "image/png" }
   ]
+
+  const [files, setFiles] = useState(datas)
 
   console.log(datas)
 

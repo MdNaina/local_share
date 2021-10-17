@@ -3,19 +3,17 @@ import image from '../assets/icons/image.png'
 import { DeleteBtn } from '../assets/svgs/Delete'
 import { DownloadBtn } from '../assets/svgs/Download'
 
-interface FileProps {
-  name: string;
-  type: string;
-  path: string;
-}
+import { FileProps } from './fileInterface'
 
-export const File: FC<FileProps> = ({ name, type, path }) => {
+
+export const File: FC<FileProps> = ({ file, fileList, setFileList }) => {
   const [isDeleteHover, setDeleteHover] = useState(false)
   const [isDownloadHover, setDownloadHover] = useState(false)
+
   return (
     <div className="d-flex align-items-center  justify-content-space-between position-relative mx-auto" style={Style.container}>
-      <img src={image} alt={path} style={Style.png} />
-      <p className="text-start" style={{ width: "80%", color: 'red', margin: "auto 10px" }}>{name}</p>
+      <img src={image} alt={file.path} style={Style.png} />
+      <p className="text-start" style={{ width: "80%", color: 'red', margin: "auto 10px" }}>{file.name}</p>
       <DeleteBtn
         color={isDeleteHover ? "#fff" : "#D41B1B"}
         background={isDeleteHover ? "#D41B1B" : "#fff"}
