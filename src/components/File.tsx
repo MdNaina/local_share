@@ -21,12 +21,14 @@ export const File: FC<FileProps> = ({ name, type, path }) => {
         background={isDeleteHover ? "#D41B1B" : "#fff"}
         onMouseEnter={() => setDeleteHover(true)}
         onMouseLeave={() => setDeleteHover(false)}
+        onClickEvent={() => console.log('trash')}
       />
       <DownloadBtn
         color={isDownloadHover ? "#fff" : "#0572BB"}
         background={isDownloadHover ? "#0572BB" : "#fff"}
         onMouseEnter={() => setDownloadHover(true)}
         onMouseLeave={() => setDownloadHover(false)}
+        onClickEvent={() => console.log('download')}
       />
     </div>
   )

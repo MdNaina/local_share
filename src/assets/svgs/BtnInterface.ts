@@ -1,6 +1,7 @@
 export interface BtnProps {
   color: string;
   background: string;
-  onMouseEnter(): any
-  onMouseLeave(): any
+  onMouseEnter(): any;
+  onMouseLeave(): any;
+  onClickEvent(): void;
 }
