@@ -1,8 +1,11 @@
-import { FC } from 'react'
+import { Dispatch, FC, SetStateAction } from 'react'
 import uploadImg from '../assets/icons/upload.png'
 
+interface Props {
+  setFiles: (fileObject: FileObject[]) => void
+}
 
-export const Form: FC<{}> = () => {
+export const Form: FC<Props> = ({ setFiles }) => {
   return (
     <form className="input-group">
       <input
