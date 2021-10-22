@@ -1,8 +1,6 @@
 import React from 'react'
-import { BtnProps } from './BtnInterface'
 
-
-export const DownloadBtn: React.FC<BtnProps> = ({ color, background, onMouseEnter, onMouseLeave, onClickEvent }) => {
+export const DownloadBtn: React.FC<IBtnProps> = ({ color, background, onMouseEnter, onMouseLeave, onClickEvent }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

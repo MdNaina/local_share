@@ -1,21 +1,18 @@
 import { FC, useState } from 'react'
 import { File } from './File'
 
+interface Props {
+  files: IFileObject[],
+  setFiles: ISetFiles,
+}
 
-export const FileList: FC<{}> = () => {
-  const datas: Array<FileObject> = [
-    { id: "24241", name: "image1", path: "public/upload/", type: "image/png" }
-  ]
-
-  const [files, setFiles] = useState<Array<FileObject>>(datas)
-
-  console.log(datas)
+export const FileList: FC<Props> = ({ files, setFiles }) => {
 
   return (
     <div className="mt-5">
-      {datas.map(data => {
+      {files.map(data => {
         return (
-          <File file={data} fileList={files} setFileList={setFiles} />
+          <File file={data} key={data.id} />
         )
       })}
     </div>
