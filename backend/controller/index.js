@@ -37,8 +37,11 @@ const uploadFile = async (req, res) => {
   if (!req.files)
     return res.status(500).json({ error: "file is not found" })
 
+  const { ip } = req.body;
+
+  console.log(req)
+
   let id = v4();
-  console.log(id, req.files['file'])
   let { name, mimetype, size, mv } = req.files['file'];
   mv(`/home/mdnaina/project/react_project/my-share/backend/public/uploads/${id}-${name}`, async (err) => {
     if (err) {
@@ -46,8 +49,8 @@ const uploadFile = async (req, res) => {
       return res.status(500).json({ error: "uploads file failed, Please try again", err })
     }
     try {
-      let record = await FileModel.create({ id, name: name, mimetype: mimetype, size: size, path: `${id}-${name}` })
-      console.log(record)
+      let record = await FileModel.create({ id, user_ip: ip, name: name, mimetype: mimetype, size: size, path: `${id}-${name}` })
+      // console.log(record)
       return res.json(record)
     } catch (e) {
       return res.json({ error: "can't add the file to database", err: e })

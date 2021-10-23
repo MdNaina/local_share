@@ -1,18 +1,30 @@
 import axios from 'axios'
-import { FC, useRef } from 'react'
+import { FC, FormEvent, useRef, useState } from 'react'
 import uploadImg from '../assets/icons/upload.png'
 
 interface Props {
   setFiles: ISetFiles
+  ip: string
 }
 
-export const Form: FC<Props> = ({ setFiles }) => {
+export const Form: FC<Props> = ({ setFiles, ip }) => {
 
   const uploadfile = useRef<HTMLInputElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
+  const [fileInput, setFileInput] = useState('');
 
-  const upload = async () => {
+  const updateFiles = async () => {
+    const response: Object | any = await axios.get('http://localhost:4500/getfiles')
+    console.log(response)
+    setFiles(response?.data)
+  }
+
+
+  const upload = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     const formData = new FormData();
     let file = uploadfile.current?.files?.[0]
+    formData.set('ip', ip)
     if (file != undefined) {
       formData.append('file', file)
       let response = await axios({
@@ -22,14 +34,16 @@ export const Form: FC<Props> = ({ setFiles }) => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       console.log(response)
+      updateFiles();
+      console.log(fileInput)
+      formRef.current?.reset();
     }
     else {
       console.log(file)
     }
   }
-
   return (
-    <form className="input-group">
+    <form className="input-group mt-2" ref={formRef} onSubmit={(event) => upload(event)}>
       <input
         type="file"
         className="form-control round"
@@ -40,9 +54,8 @@ export const Form: FC<Props> = ({ setFiles }) => {
       />
       <button
         className="btn btn-outline-secondary bg-secondary"
-        type="button"
+        type="submit"
         id="inputGroupFileAddon04"
-        onClick={() => upload()}
       >
         <img
           src={uploadImg}

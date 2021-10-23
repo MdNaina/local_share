@@ -6,13 +6,17 @@ import axios from 'axios';
 
 function App() {
   useEffect(() => {
-    axios.get('http://localhost:4500/getfiles').then(response => {
-      console.log(response)
-      setFiles(response.data)
-    })
   }, [])
 
+  const onload = async () => {
+    const response = await axios.get('http://localhost:4500/getfiles')
+    setFiles(response.data)
+    const res: any = await axios.get('https://geolocation-db.com/json/')
+    setIP(res.data?.['IPv4'])
+  }
+
   const [files, setFiles] = useState<IFileObject[] | any>([])
+  const [myIP, setIP] = useState('');
 
   return (
     <div className="container">
@@ -21,8 +25,8 @@ function App() {
       </header>
       <div className="row">
         <div className="col-lg-5 col-md-10 m-auto">
-          <Form setFiles={setFiles} />
-          <FileList files={files} setFiles={setFiles} />
+          <Form setFiles={setFiles} ip={myIP} />
+          <FileList files={files} setFiles={setFiles} ip={myIP} />
         </div>
       </div>
     </div>

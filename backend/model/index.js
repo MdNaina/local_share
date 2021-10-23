@@ -11,6 +11,10 @@ FileModel.init(
       primaryKey: true,
       allowNull: false,
     },
+    user_ip: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
