@@ -12,8 +12,9 @@ type IVoid = () => void;
 
 interface IFileObject {
   id: string;
+  user_ip: string;
   name: string;
-  type: string;
+  mimetype: string;
   path: string;
 }
 
