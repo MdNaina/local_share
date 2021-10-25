@@ -26,7 +26,7 @@ function App() {
     <>
       <div className="container position relative">
         <header>
-          <h1 className="text-center">Hello World</h1>
+          <h1 className="text-center">Local Share</h1>
         </header>
         <div className="row">
           <div className="col-lg-5 col-md-10 m-auto">
