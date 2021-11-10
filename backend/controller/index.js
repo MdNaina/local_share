@@ -1,6 +1,7 @@
 const { v4 } = require('uuid');
 const { FileModel } = require('../model')
 const { unlink } = require('fs');
+const { dirname } = require('path')
 const { throws } = require('assert');
 
 const getAllFiles = async (req, res) => {
@@ -22,7 +23,7 @@ const deleteFile = async (req, res) => {
       return res.json({ error: "No Records has found" })
 
     console.log(record.path)
-    const upload_dir = '/home/mdnaina/project/react_project/my-share/backend/public/uploads/'
+    const upload_dir = `${process.cwd()}/public/uploads/`
     unlink(upload_dir + record.path, async (err) => {
       if (err) throw err;
       let deletedFile = record.destroy()
@@ -39,11 +40,10 @@ const uploadFile = async (req, res) => {
 
   const { ip } = req.body;
 
-  console.log(req)
-
   let id = v4();
   let { name, mimetype, size, mv } = req.files['file'];
-  mv(`/home/mdnaina/project/react_project/my-share/backend/public/uploads/${id}-${name}`, async (err) => {
+  console.log(process.cwd())
+  mv(`${process.cwd()}/public/uploads/${id}-${name}`, async (err) => {
     if (err) {
       console.error(err)
       return res.status(500).json({ error: "uploads file failed, Please try again", err })
