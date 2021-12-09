@@ -7,6 +7,7 @@ const router = require('./router')
 db.sync().then(() => {
   console.log('database is successfully connected')
 })
+console.log("root path", __dirname)
 
 const app = express()
 
